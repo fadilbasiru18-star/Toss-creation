@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order a custom pair — Toss Creation</title>
+<meta name="description" content="Order custom-made shoes and bags for students, working men and women, and heels for women. Style two notches higher.">
+<link rel="icon" href="img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;1,6..96,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#order">Skip to the order form</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Toss Creation home"><img src="img/logo.jpg" alt="Toss Creation crown T logo" width="52" height="52"><b>Toss Creation</b></a>
+    <button class="menu" id="menu" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html#who">Made for you</a>
+      <a href="index.html#collection">Collection</a>
+      <a href="index.html#how">How it works</a>
+      <a href="index.html#bags">Bags</a>
+      <a class="btn btn-gold" href="order.html">Start your order</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top" style="padding-top:24px">
+<section id="order" aria-labelledby="ord-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="ord-h">Order your custom pair</h2>
+      <p>Tell us what you want. We send it to our WhatsApp, then agree the price, payment and date with you there.</p>
+    </div>
+    <div class="order">
+      <div id="formCol">
+      <form id="f" novalidate data-kind="shoe">
+        <fieldset>
+          <legend>Who is it for?</legend>
+          <div class="opts" id="who-opts"></div>
+          <p class="err" id="e-who" role="alert"></p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Pick a style to start from</legend>
+          <p class="hint">Choose one to copy and change, or tell us your own idea.</p>
+          <div class="pick" id="pick"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Make it yours</legend>
+          <div class="bag-only">
+            <div class="field"><span class="lab">Bag type</span><div class="opts" id="o-bagtype"></div></div>
+            <div class="field"><span class="lab">Bag size</span><div class="opts" id="o-bagsize"></div></div>
+            <div class="field"><span class="lab">Straps</span><div class="opts" id="o-strap"></div></div>
+          </div>
+          <div class="field"><span class="lab">Main colour</span><div class="opts" id="o-colour"></div></div>
+          <div class="field"><span class="lab">Metal or accent detail</span><div class="opts" id="o-accent"></div></div>
+          <div class="field"><span class="lab">Material</span><div class="opts" id="o-material"></div></div>
+          <div class="shoe-only">
+            <div class="field"><span class="lab" id="solelab">Sole or heel</span><div class="opts" id="o-sole"></div></div>
+            <div class="field"><span class="lab">How it fastens</span><div class="opts" id="o-closure"></div></div>
+          </div>
+          <div class="row">
+            <div class="field"><label for="initials">Initials or short text (up to 6 letters)</label><input id="initials" type="text" maxlength="6" autocomplete="off" placeholder="e.g. TA"></div>
+            <div class="field"><label for="qty">How many pairs or bags</label><input id="qty" type="number" min="1" max="50" value="1" inputmode="numeric"></div>
+          </div>
+          <div class="field"><label for="ref">Reference photo (optional)</label><input id="ref" type="file" accept="image/*"><div class="fileprev" id="fileprev"></div><p class="err" id="e-ref" role="alert"></p></div>
+          <div class="field"><label for="notes">Anything else we should know</label><textarea id="notes" placeholder="Wide feet, school colours, a wedding colour, a heel height you like..."></textarea></div>
+        </fieldset>
+
+        <fieldset class="shoe-only">
+          <legend>Your size</legend>
+          <div class="row">
+            <div class="field"><label for="size">Shoe size (EU)</label>
+              <select id="size"><option value="">Choose a size</option></select>
+              <p class="err" id="e-size" role="alert"></p></div>
+            <div class="field"><label for="foot">Foot length in cm (optional)</label><input id="foot" type="number" step="0.1" min="10" max="35" inputmode="decimal" placeholder="e.g. 25.5"></div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Book your fitting</legend>
+          <div class="field"><span class="lab shoe-only" style="display:none"></span>
+            <span class="lab">How should we take your measurements?</span>
+            <div class="opts" id="o-fit"></div><p class="err" id="e-fit" role="alert"></p></div>
+          <div class="row">
+            <div class="field"><label for="fitdate">Preferred fitting date</label><input id="fitdate" type="date"></div>
+            <div class="field"><label for="needby">Needed by (optional)</label><input id="needby" type="date"></div>
+          </div>
+          <div class="field"><span class="lab">Collection</span><div class="opts" id="o-deliv"></div></div>
+          <div class="field" id="cityField" hidden><label for="city">Delivery city or area</label><input id="city" type="text" autocomplete="address-level2"><p class="err" id="e-city" role="alert"></p></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Your details</legend>
+          <div class="row">
+            <div class="field"><label for="name">Full name</label><input id="name" type="text" autocomplete="name"><p class="err" id="e-name" role="alert"></p></div>
+            <div class="field"><label for="phone">WhatsApp or phone number</label><input id="phone" type="tel" autocomplete="tel"><p class="err" id="e-phone" role="alert"></p></div>
+          </div>
+          <div class="field"><label for="email">Email (optional)</label><input id="email" type="email" autocomplete="email"></div>
+          <button class="btn btn-gold" type="submit" id="send">Send my order on WhatsApp</button>
+        </fieldset>
+      </form>
+      </div>
+      <aside class="sum" aria-label="Your order so far">
+        <h3>Your order so far</h3>
+        <div class="thumb" id="sumthumb" hidden></div>
+        <dl id="sumlist"></dl>
+        <p class="none" id="sumnone">Your choices will appear here as you make them.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <img src="img/logo.jpg" alt="" width="84" height="84">
+      <h2 class="gold-text">Style two notches higher.</h2>
+      <p style="margin-top:10px;color:var(--muted)">House of Toss. Custom shoes and bags.</p>
+    </div>
+    <div>
+      <h3>Explore</h3>
+      <ul><li><a href="index.html#who">Made for you</a></li><li><a href="index.html#collection">Collection</a></li><li><a href="index.html#how">How it works</a></li><li><a href="index.html#bags">Bags</a></li></ul>
+    </div>
+    <div>
+      <h3>Get in touch</h3>
+      <ul id="contact"><li><a href="order.html">Send an order request</a></li></ul>
+    </div>
+  </div>
+  <div class="wrap"><p class="copy">© <span id="yr"></span> Toss Creation. All rights reserved. <a href="admin.html" style="color:#7d7566">Admin</a></p>
+    <p class="copy" style="margin-top:6px">Website by Bashiru Fadill Oluwashubomi · <a href="tel:+2349078097713" style="color:#7d7566">09078097713</a> · <a href="mailto:fadilbasiru18@gmail.com" style="color:#7d7566">fadilbasiru18@gmail.com</a></p></div>
+</footer>
+<script src="site.js"></script>
+<script src="order.js"></script>
+</body>
+</html>

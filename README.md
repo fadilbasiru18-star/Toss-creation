@@ -10,13 +10,18 @@ A black and gold booking site. Customers pick a style, change the colour, materi
 
 ```
 toss-site/
-  index.html     the website (all code in one file)
+  index.html     page 1: home, styles and collection
+  order.html     page 2: the order and booking form
   admin.html     the owner's order tracker
+  style.css      the look of the site (colours, fonts, layout)
+  site.js        settings (WhatsApp number) and the product list
+  home.js        code for page 1
+  order.js       code for page 2 (the form and the WhatsApp message)
   README.md      this file
   img/           product photos on white backgrounds, and the logo
 ```
 
-There is nothing to install and no build step. Keep the three items together in one folder so the photos load.
+There is nothing to install and no build step. Keep every file together in one folder, with the `img` folder next to them, or the photos will not load.
 
 ## Open it on your computer
 
@@ -25,7 +30,7 @@ Double-click `index.html`. If you use VS Code, you can also right-click it and c
 ## Put it online (GitHub Pages, free)
 
 1. Make a free account at github.com and create a new **Public** repository.
-2. Choose "uploading an existing file", then drag in the contents of this folder (`index.html`, `admin.html`, `README.md` and the `img` folder). `index.html` must sit at the top level of the repository, not inside another folder.
+2. Choose "uploading an existing file", then drag in everything inside this folder (all the files and the `img` folder). `index.html` must sit at the top level of the repository, not inside another folder.
 3. Commit the files.
 4. Go to Settings, then Pages. Set Source to "Deploy from a branch", branch `main`, folder `/ (root)`, and Save.
 5. After a minute or two the link appears: `yourusername.github.io/repository-name`.
@@ -34,7 +39,7 @@ When you buy a domain, type it into the Custom domain box on the same Pages scre
 
 ## How an order works
 
-1. The customer chooses who it is for (students, working men, working women, heels, or bags) and a style, then colour, material, sole, size and how you should take measurements.
+1. On page 1 the customer looks through the styles and taps "Make it yours". That opens page 2 with the style already chosen. There they choose who it is for (students, working men, working women, heels, or bags) and a style, then colour, material, sole, size and how you should take measurements.
 2. They give their name and phone number and press **Send my order on WhatsApp**.
 3. WhatsApp opens to your number with the whole order written out. The order is only sent when the customer presses send in the chat.
 4. You reply there and agree the price, the payment and the date.
@@ -43,7 +48,7 @@ A customer's reference photo cannot be attached automatically, so the page asks 
 
 ## Change the WhatsApp number or details
 
-Open `index.html` and search for `CONFIG`. It looks like this:
+Open `site.js` and search for `CONFIG`. It looks like this:
 
 ```js
 const CONFIG = {
@@ -58,7 +63,7 @@ Use the country code and no spaces or plus sign. For example, 0802 359 0664 beco
 ## Add, rename or remove a product
 
 1. Put the photo in `img/`. A 1200 by 1000 picture on a plain white background looks best.
-2. In `index.html`, search for `const ITEMS`. Add a line in the same style as the others:
+2. In `site.js`, search for `const ITEMS`. Add a line in the same style as the others:
 
 ```js
 {id:'my-new-shoe', name:'Name shown on the site', tags:['men'], alt:'Short description of the photo'},
@@ -90,3 +95,7 @@ The site loads the fonts Bodoni Moda and Jost from Google Fonts. Without an inte
 ## Credits
 
 Created by Bashiru Fadill Oluwashubomi. Phone 09078097713, email fadilbasiru18@gmail.com.
+
+## If the photos do not show online
+
+This almost always means the `img` folder did not reach GitHub. Open your repository and check that an `img` folder is listed and that it holds the photos and `logo.jpg`. If it is missing or empty, upload it again (a computer works better than a phone for uploading folders). File names must match exactly, including lower case.
