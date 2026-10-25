@@ -9,19 +9,13 @@ A black and gold booking site. Customers pick a style, change the colour, materi
 ## What is in the folder
 
 ```
-toss-site/
-  index.html     page 1: home, styles and collection
-  order.html     page 2: the order and booking form
-  admin.html     the owner's order tracker
-  style.css      the look of the site (colours, fonts, layout)
-  site.js        settings (WhatsApp number) and the product list
-  home.js        code for page 1
-  order.js       code for page 2 (the form and the WhatsApp message)
-  README.md      this file
-  img/           product photos on white backgrounds, and the logo
+index.html   page 1: home, styles and collection
+order.html   page 2: the order and booking form
+admin.html   the owner's order tracker
+README.md    this file
 ```
 
-There is nothing to install and no build step. Keep every file together in one folder, with the `img` folder next to them, or the photos will not load.
+Each page is a single file with its look, code and photos inside, so there are no folders to upload. Keep the files together in one place.
 
 ## Open it on your computer
 
@@ -48,7 +42,7 @@ A customer's reference photo cannot be attached automatically, so the page asks 
 
 ## Change the WhatsApp number or details
 
-Open `site.js` and search for `CONFIG`. It looks like this:
+Open `index.html` and `order.html` in a text editor and search for `CONFIG`. Change the number in both. It looks like this:
 
 ```js
 const CONFIG = {
@@ -62,8 +56,8 @@ Use the country code and no spaces or plus sign. For example, 0802 359 0664 beco
 
 ## Add, rename or remove a product
 
-1. Put the photo in `img/`. A 1200 by 1000 picture on a plain white background looks best.
-2. In `site.js`, search for `const ITEMS`. Add a line in the same style as the others:
+1. Photos are packed inside the pages, so adding a product means regenerating them. Ask your developer or Claude to add it.
+2. In both pages, search for `const ITEMS`. Add a line in the same style as the others:
 
 ```js
 {id:'my-new-shoe', name:'Name shown on the site', tags:['men'], alt:'Short description of the photo'},
@@ -98,4 +92,4 @@ Created by Bashiru Fadill Oluwashubomi. Phone 09078097713, email fadilbasiru18@g
 
 ## If the photos do not show online
 
-This almost always means the `img` folder did not reach GitHub. Open your repository and check that an `img` folder is listed and that it holds the photos and `logo.jpg`. If it is missing or empty, upload it again (a computer works better than a phone for uploading folders). File names must match exactly, including lower case.
+Make sure `index.html` and `order.html` uploaded fully. Each is about 2 MB. Open the file on GitHub: if it says the file is too big to show, that is fine. Refresh the website in a private tab, because phones keep old copies.
