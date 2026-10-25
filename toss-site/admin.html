@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Toss Creation admin</title>
+<link rel="icon" href="img/logo.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--line:#2b2823;--gold:#c9a24b;--gold-hi:#f0d78c;--gold-lo:#8f6b1e;--text:#f2ece0;--muted:#b9b09f;--panel:#111010;--gold-grad:linear-gradient(120deg,#f6e3a4 0%,#c9a24b 38%,#8f6b1e 62%,#e9c76c 100%);--display:"Bodoni Moda",Georgia,serif;--body:"Jost","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:#000;color:var(--text);font:400 16px/1.5 var(--body)}
+h1,h2,h3{font-family:var(--display);font-weight:500;margin:0}
+a{color:var(--gold-hi)}
+.wrap{width:min(1100px,100% - 32px);margin-inline:auto}
+header{border-bottom:1px solid var(--line);padding:14px 0}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
+.brand img{width:44px;height:44px;mix-blend-mode:lighten}
+.btn{font:600 14px var(--body);padding:10px 16px;border:1px solid var(--gold);background:none;color:var(--gold-hi);border-radius:2px;cursor:pointer;text-decoration:none;display:inline-block}
+.btn:hover{background:rgba(201,162,75,.12)}
+.btn.gold{background:var(--gold-grad);color:#000;border-color:var(--gold)}
+.btn.sm{padding:7px 12px;font-size:13px}
+.btn.danger{border-color:#7a2d2d;color:#f3a0a0}
+input,select,textarea{font:inherit;color:var(--text);background:#0b0b0b;border:1px solid #3a352c;border-radius:2px;padding:9px 11px;width:100%}
+input:focus,select:focus,textarea:focus,.btn:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
+label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:4px}
+.gate{max-width:380px;margin:12vh auto;padding:28px;border:1px solid var(--gold-lo);background:var(--panel)}
+.gate h1{font-size:1.8rem;margin-bottom:8px}
+.gate p{color:var(--muted);margin:0 0 16px}
+.err{color:#f3a0a0;min-height:1.3em;margin:8px 0 0;font-size:.9rem}
+.note{border:1px solid var(--line);background:var(--panel);padding:12px 16px;color:var(--muted);font-size:.92rem;margin:20px 0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0}
+.stat{border:1px solid var(--line);background:var(--panel);padding:14px 16px}
+.stat b{display:block;font:500 1.7rem var(--display);color:var(--gold-hi)}
+.stat span{color:var(--muted);font-size:.88rem}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:end;margin-bottom:18px}
+.bar>div{flex:1 1 180px}
+.card{border:1px solid var(--line);background:var(--panel);padding:18px;margin-bottom:14px}
+.card .top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
+.card .id{font-family:var(--display);font-size:1.15rem;color:var(--gold-hi)}
+.card .when{color:var(--muted);font-size:.85rem}
+.card pre{white-space:pre-wrap;word-break:break-word;font:inherit;color:var(--text);margin:12px 0;padding:12px;background:#0b0b0b;border:1px solid #221f19;font-size:.93rem}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:10px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.tag{display:inline-block;padding:2px 10px;border:1px solid var(--gold-lo);font-size:.8rem;color:var(--gold-hi);margin-left:8px}
+dialog{background:var(--panel);color:var(--text);border:1px solid var(--gold-lo);padding:22px;width:min(560px,92vw)}
+dialog::backdrop{background:rgba(0,0,0,.7)}
+dialog textarea{min-height:200px}
+.empty{padding:40px;border:1px dashed var(--line);text-align:center;color:var(--muted)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<div id="gate" class="gate">
+  <h1 id="gtitle">Admin</h1>
+  <p id="gtext"></p>
+  <form id="gform">
+    <label for="pw">Passcode</label>
+    <input id="pw" type="password" autocomplete="current-password" required>
+    <div id="pw2wrap" hidden style="margin-top:12px"><label for="pw2">Repeat passcode</label><input id="pw2" type="password" autocomplete="new-password"></div>
+    <p class="err" id="gerr" role="alert"></p>
+    <button class="btn gold" type="submit" id="gbtn">Open</button>
+  </form>
+</div>
+
+<div id="app" hidden>
+  <header>
+    <div class="wrap">
+      <a class="brand" href="index.html"><img src="img/logo.jpg" alt=""><h1 style="font-size:1.3rem">Toss Creation admin</h1></a>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn sm" id="add">Add an order</button>
+        <button class="btn sm" id="csv">Download CSV</button>
+        <button class="btn sm" id="bk">Back up</button>
+        <button class="btn sm" id="rs">Restore</button>
+        <button class="btn sm" id="lock">Lock</button>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="note">Orders go straight to WhatsApp (08023590664). This page is your tracker. It lists orders placed on this device, and you can paste in any order message that arrives on WhatsApp to add it. Everything stays in this browser, so use Back up to keep a copy or move it to another device.</div>
+    <div class="stats" id="stats"></div>
+    <div class="bar">
+      <div><label for="q">Search</label><input id="q" type="search" placeholder="Name, phone, style or order number"></div>
+      <div style="flex:0 1 200px"><label for="sf">Status</label><select id="sf"></select></div>
+    </div>
+    <div id="list"></div>
+  </main>
+</div>
+
+<dialog id="dlg">
+  <form method="dialog" id="dform">
+    <h2 style="font-size:1.4rem;margin-bottom:6px">Add an order</h2>
+    <p style="color:var(--muted);margin:0 0 12px">Paste the order message you received on WhatsApp. We read the name and phone from it.</p>
+    <textarea id="paste" aria-label="Order message"></textarea>
+    <div class="acts"><button class="btn gold" value="ok" id="dok">Add</button><button class="btn" value="cancel" formnovalidate>Cancel</button></div>
+  </form>
+</dialog>
+<input type="file" id="file" accept="application/json" hidden>
+
+<script>
+const $=s=>document.querySelector(s);
+const STATUS=['New','Price agreed','Deposit paid','In production','Ready','Delivered','Cancelled'];
+const KEY='toss:requests', AUTH='toss:admin', SESS='toss:admin:ok';
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const naira=n=>'₦'+Number(n||0).toLocaleString('en-NG');
+let orders=[];
+
+/* ---------- passcode ---------- */
+async function hash(t){
+  try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('toss|'+t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+  catch(_){let h=5381;for(const c of 'toss|'+t)h=((h<<5)+h+c.charCodeAt(0))|0;return 'w'+h}
+}
+const store={get(k){try{return localStorage.getItem(k)}catch(_){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(_){}}};
+function sess(v){try{v===undefined?0:(v?sessionStorage.setItem(SESS,'1'):sessionStorage.removeItem(SESS));return sessionStorage.getItem(SESS)==='1'}catch(_){return false}}
+const hasPw=!!store.get(AUTH);
+if(!hasPw){$('#gtitle').textContent='Create a passcode';$('#gtext').textContent='Choose a passcode for this admin page on this device.';$('#pw2wrap').hidden=false;$('#pw2').required=true;$('#pw').autocomplete='new-password';$('#gbtn').textContent='Save passcode'}
+else{$('#gtext').textContent='Enter your passcode to see your orders.'}
+$('#gform').addEventListener('submit',async e=>{
+  e.preventDefault();const p=$('#pw').value;$('#gerr').textContent='';
+  if(!hasPw){
+    if(p.length<4){$('#gerr').textContent='Use at least 4 characters.';return}
+    if(p!==$('#pw2').value){$('#gerr').textContent='The two passcodes do not match.';return}
+    store.set(AUTH,await hash(p));sess(true);open();
+  }else if(await hash(p)===store.get(AUTH)){sess(true);open()}
+  else{$('#gerr').textContent='That passcode is not right.';$('#pw').select()}
+});
+$('#lock').onclick=()=>{sess(false);location.reload()};
+if(sess())open();
+
+/* ---------- data ---------- */
+function load(){
+  try{orders=JSON.parse(store.get(KEY)||'[]')}catch(_){orders=[]}
+  orders.forEach(o=>{o.status=o.status||'New';o.price=o.price||0;o.paid=o.paid||0;o.notes=o.notes||'';o.date=o.date||Date.now();parse(o)});
+}
+function save(){store.set(KEY,JSON.stringify(orders))}
+function parse(o){
+  const g=k=>((o.msg||'').match(new RegExp('^'+k+':\\s*(.+)$','mi'))||[])[1]?.trim()||'';
+  o.name=o.name||g('Name');o.phone=o.phone||g('Phone');
+  o.style=o.style||g('Style')||g('Starting style');
+  o.who=o.who||g('For');
+}
+function waLink(o,text){
+  let d=(o.phone||'').replace(/\D/g,'');
+  if(d.startsWith('0'))d='234'+d.slice(1);
+  return d?`https://wa.me/${d}${text?'?text='+encodeURIComponent(text):''}`:'';
+}
+
+/* ---------- render ---------- */
+function open(){$('#gate').hidden=true;$('#app').hidden=false;load();
+  $('#sf').innerHTML='<option value="">All</option>'+STATUS.map(s=>`<option>${s}</option>`).join('');render()}
+function render(){
+  const act=orders.filter(o=>o.status!=='Cancelled');
+  const quoted=act.reduce((a,o)=>a+Number(o.price||0),0),paid=act.reduce((a,o)=>a+Number(o.paid||0),0);
+  $('#stats').innerHTML=[[orders.length,'All orders'],[orders.filter(o=>o.status==='New').length,'New'],[orders.filter(o=>['Deposit paid','In production'].includes(o.status)).length,'In progress'],[naira(quoted),'Quoted'],[naira(paid),'Received'],[naira(quoted-paid),'Still to collect']].map(([v,l])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join('');
+  const q=$('#q').value.trim().toLowerCase(),sf=$('#sf').value;
+  const rows=orders.slice().sort((a,b)=>b.date-a.date).filter(o=>(!sf||o.status===sf)&&(!q||(o.id+' '+o.msg+' '+o.name+' '+o.phone).toLowerCase().includes(q)));
+  $('#list').innerHTML=rows.length?rows.map(card).join(''):`<div class="empty">${orders.length?'No orders match.':'No orders here yet. Orders placed on this device appear automatically. Use Add an order to paste one from WhatsApp.'}</div>`;
+}
+function card(o){
+  const wa=waLink(o,`Hello ${o.name||''}, this is Toss Creation about your order ${o.id}.`);
+  return `<article class="card" data-id="${esc(o.id)}">
+    <div class="top"><div><span class="id">${esc(o.id)}</span><span class="tag">${esc(o.status)}</span></div><span class="when">${new Date(o.date).toLocaleString('en-NG',{dateStyle:'medium',timeStyle:'short'})}</span></div>
+    <p style="margin:6px 0 0"><b>${esc(o.name||'No name')}</b> ${o.phone?'· '+esc(o.phone):''}</p>
+    <pre>${esc(o.msg)}</pre>
+    <div class="row">
+      <div><label>Status</label><select data-f="status">${STATUS.map(s=>`<option${s===o.status?' selected':''}>${s}</option>`).join('')}</select></div>
+      <div><label>Price agreed (₦)</label><input data-f="price" type="number" min="0" inputmode="numeric" value="${o.price||''}"></div>
+      <div><label>Received so far (₦)</label><input data-f="paid" type="number" min="0" inputmode="numeric" value="${o.paid||''}"></div>
+    </div>
+    <label>Notes</label><textarea data-f="notes" rows="2">${esc(o.notes)}</textarea>
+    <div class="acts">${wa?`<a class="btn sm gold" href="${wa}" target="_blank" rel="noopener">Reply on WhatsApp</a>`:''}<button class="btn sm danger" data-del>Delete</button></div>
+  </article>`;
+}
+$('#list').addEventListener('change',e=>{
+  const c=e.target.closest('.card');if(!c||!e.target.dataset.f)return;
+  const o=orders.find(x=>x.id===c.dataset.id);o[e.target.dataset.f]=e.target.type==='number'?Number(e.target.value||0):e.target.value;
+  save();if(e.target.dataset.f!=='notes')render();
+});
+$('#list').addEventListener('click',e=>{
+  if(!e.target.matches('[data-del]'))return;
+  const id=e.target.closest('.card').dataset.id;
+  if(confirm('Delete order '+id+'? This cannot be undone.')){orders=orders.filter(o=>o.id!==id);save();render()}
+});
+$('#q').addEventListener('input',render);$('#sf').addEventListener('change',render);
+
+/* ---------- add / export / restore ---------- */
+$('#add').onclick=()=>{$('#paste').value='';$('#dlg').showModal();$('#paste').focus()};
+$('#dform').addEventListener('submit',e=>{
+  if(e.submitter?.value!=='ok')return;
+  const msg=$('#paste').value.trim();if(!msg)return;
+  const m=msg.match(/TC-\d{6}-[A-Z0-9]{4}/);
+  let id=m?m[0]:'TC-'+new Date().toISOString().slice(2,10).replace(/-/g,'')+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
+  if(orders.some(o=>o.id===id))id+='b';
+  orders.push({id,date:Date.now(),msg,status:'New'});parse(orders[orders.length-1]);save();render();
+});
+function download(name,text,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+$('#csv').onclick=()=>{
+  const cell=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+  const head=['Order','Date','Name','Phone','Status','Price','Received','Notes','Message'];
+  const rows=orders.map(o=>[o.id,new Date(o.date).toISOString(),o.name,o.phone,o.status,o.price,o.paid,o.notes,o.msg].map(cell).join(','));
+  download('toss-orders.csv',[head.join(','),...rows].join('\n'),'text/csv');
+};
+$('#bk').onclick=()=>download('toss-orders-backup.json',JSON.stringify(orders,null,2),'application/json');
+$('#rs').onclick=()=>$('#file').click();
+$('#file').addEventListener('change',async e=>{
+  const f=e.target.files[0];if(!f)return;
+  try{const list=JSON.parse(await f.text());if(!Array.isArray(list))throw 0;
+    list.forEach(o=>{if(o&&o.id&&!orders.some(x=>x.id===o.id))orders.push(o)});save();load();render()}
+  catch(_){alert('That file is not a Toss Creation backup.')}
+  e.target.value='';
+});
+</script>
+</body>
+</html>
