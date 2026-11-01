@@ -1,6 +1,6 @@
 # House of Toss
 
-Custom-made shoes and bags. *Style two notches higher.*
+Custom shoes and fashion accessories. *Style two notches higher.*
 
 Created by **Bashiru Fadill Oluwashubomi** · 09078097713 · fadilbasiru18@gmail.com
 
