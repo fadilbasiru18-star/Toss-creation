@@ -1,4 +1,4 @@
-# Toss Creation
+# House of Toss
 
 Custom-made shoes and bags. *Style two notches higher.*
 
@@ -15,7 +15,7 @@ admin.html   the owner's order tracker
 README.md    this file
 ```
 
-Each page is a single file with its look, code and photos inside, so there are no folders to upload. Keep the files together in one place.
+Each page is a single file with its look, code and photos inside, so there are no folders to upload.
 
 ## Open it on your computer
 
@@ -92,4 +92,8 @@ Created by Bashiru Fadill Oluwashubomi. Phone 09078097713, email fadilbasiru18@g
 
 ## If the photos do not show online
 
-Make sure `index.html` and `order.html` uploaded fully. Each is about 2 MB. Open the file on GitHub: if it says the file is too big to show, that is fine. Refresh the website in a private tab, because phones keep old copies.
+Make sure `index.html` and `order.html` uploaded fully. Each is about 2 MB. Refresh the website in a private tab, because phones keep old copies.
+
+## Delivery time
+
+The site tells customers that most orders are ready in 7 to 14 working days, depending on the order, and that express is faster but costs a lot more (quoted on WhatsApp). On the order page they choose Standard or Express, and the choice appears in the WhatsApp message. To change the wording, search for `TIMING` in both pages and for "7 to 14" in `index.html` and `order.html`.
